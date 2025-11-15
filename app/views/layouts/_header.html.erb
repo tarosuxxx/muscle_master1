@@ -1,0 +1,33 @@
+<header class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <%= link_to 'FitVideo SNS', root_path, class: 'navbar-brand' %>
+    
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        
+        <li class="nav-item">
+          <%= link_to 'タイムライン', posts_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'About', about_path, class: 'nav-link' %>
+        </li>
+        
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= form_with url: destroy_user_session_path, method: :delete, class: 'm-0 p-0' do |f| %>
+              <%= f.submit 'ログアウト', class: 'btn btn-link nav-link' %>
+            <% end %>
+          </li>
+          
+          <% else %>
+          <li class="nav-item">
+            <%= link_to '新規登録', new_user_registration_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'サインイン', new_user_session_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</header>

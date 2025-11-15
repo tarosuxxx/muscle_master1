@@ -1,0 +1,27 @@
+<div class="container text-center py-5">
+  <% if user_signed_in? %>
+    
+    <h1 class="display-4">ようこそ、<%= current_user.name %>さん！</h1>
+    <p class="lead">今日の筋トレの記録をつけましょう。</p>
+    
+    <div class="mt-4">
+      <%= link_to 'タイムラインを見る', posts_path, class: 'btn btn-primary btn-lg me-2' %>
+      <%= link_to '新規投稿する', new_post_path, class: 'btn btn-outline-primary btn-lg' %>
+    </div>
+    
+  <% else %>
+    
+    <h1 class="display-3">FitVideo SNS へようこそ</h1>
+    <p class="lead">あなたのトレーニング記録を共有し、仲間を見つけよう。</p>
+    
+    <div class="mt-5">
+      <%= link_to '今すぐ新規登録！', new_user_registration_path, class: 'btn btn-success btn-lg me-2' %>
+      <%= link_to 'サインインはこちら', new_user_session_path, class: 'btn btn-outline-secondary btn-lg' %>
+    </div>
+    
+    <div class="mt-3">
+      <%= link_to 'このアプリについて (About)', about_path, class: 'text-muted' %>
+    </div>
+    
+  <% end %>
+</div>
