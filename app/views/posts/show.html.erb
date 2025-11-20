@@ -1,0 +1,19 @@
+<h1>投稿詳細</h1>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">投稿者: <%= link_to @post.user.name, user_path(@post.user) %></h5>
+    <p class="card-text">内容: <%= @post.content %></p>
+    
+    <%# 🌟 編集・削除ボタンの表示制限 (要件 10) 🌟 %>
+    <% if current_user == @post.user %>
+      <%= link_to '編集', edit_post_path(@post), class: 'btn btn-warning me-2' %>
+      <%= link_to '削除', post_path(@post), 
+                  method: :delete, 
+                  data: { confirm: '本当に削除してもよろしいですか？' }, # 削除前の確認 (要件 9)
+                  class: 'btn btn-danger' %>
+    <% end %>
+    
+    <%= link_to '一覧に戻る', posts_path, class: 'btn btn-secondary mt-3' %>
+  </div>
+</div>
