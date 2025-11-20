@@ -2,7 +2,7 @@
 
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">投稿者: <%= @post.user.name %></h5>
+    <h5 class="card-title">投稿者: <%= link_to @post.user.name, user_path(@post.user) %></h5>
     <p class="card-text">内容: <%= @post.content %></p>
     
     <%# 🌟 編集・削除ボタンの表示制限 (要件 10) 🌟 %>

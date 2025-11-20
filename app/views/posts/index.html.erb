@@ -4,7 +4,7 @@
 <% @posts.each do |post| %>
   <div class="card mb-3">
     <div class="card-body">
-      <h5 class="card-title">投稿者: <%= post.user.name %></h5>
+      <h5 class="card-title">投稿者: <%= link_to @post.user.name, user_path(@post.user) %></h5>
       <p class="card-text"><%= post.content %></p>
       
       <%= link_to '詳細を見る', post_path(post), class: 'btn btn-sm btn-info me-2' %>
