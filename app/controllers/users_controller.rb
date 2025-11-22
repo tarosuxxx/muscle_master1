@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.with_attached_video_file.order(created_at: :desc).page(params[:page])
+    @posts = @user.posts.with_attached_video_file.order(created_at: :desc)#.page(params[:page])
   end
 
   def edit
