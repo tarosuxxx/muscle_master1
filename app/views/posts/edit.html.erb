@@ -1,2 +1,4 @@
 <h1>投稿の編集</h1>
 <%= render 'form', post: @post %>
+
+<%= link_to '削除', @post, method: :delete, data: { confirm: '本当にこの投稿を削除しますか？' }, class: "btn btn-danger" %>
