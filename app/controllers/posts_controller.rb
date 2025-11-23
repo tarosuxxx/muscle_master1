@@ -5,6 +5,9 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all.order(created_at: :desc)
+    if params[:keyword].present?
+      @posts = @posts.search_by_keyword(params[:keyword])
+    end
   end
   
   def new

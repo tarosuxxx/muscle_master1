@@ -5,4 +5,10 @@ class Post < ApplicationRecord
   has_many :liking_users, through: :likes, source: :user
 
   validates :content, presence: true
+
+  scope :search_by_keyword, -> (keyword) {
+    unless keyword.blank?
+      where('content LIKE ?', "%#{keyword}%")
+    end
+  }
 end
