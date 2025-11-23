@@ -13,6 +13,15 @@
                   data: { confirm: '本当に削除してもよろしいですか？' }, # 削除前の確認 (要件 9)
                   class: 'btn btn-danger' %>
     <% end %>
+    <p>この投稿へのいいね数: <%= @post.likes.count %></p>
+
+    <% if user_signed_in? %> 
+      <% if current_user.already_liked?(@post) %>
+        <%= link_to '❤️ いいね！解除', post_likes_path(@post), method: :delete, class: 'btn btn-secondary' %>
+      <% else %>
+        <%= link_to '♡ いいね！', post_likes_path(@post), method: :post, class: 'btn btn-danger' %>
+      <% end %>
+    <% end %>
     
     <%= link_to '一覧に戻る', posts_path, class: 'btn btn-secondary mt-3' %>
   </div>
