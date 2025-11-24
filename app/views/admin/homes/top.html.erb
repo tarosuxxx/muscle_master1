@@ -1,0 +1,48 @@
+<h1>ようこそ、<%= current_user.name %>管理者様！</h1>
+<p class="lead">管理画面ダッシュボード</p>
+
+<hr>
+
+<h2>📊 アプリケーション統計情報</h2>
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card text-white bg-primary">
+            <div class="card-header">会員総数</div>
+            <div class="card-body">
+                <h3 class="card-title"><%= @users_count %> 名</h3>
+                <%= link_to '会員一覧へ', admin_users_path, class: 'btn btn-light btn-sm' %>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card text-white bg-success">
+            <div class="card-header">投稿総数</div>
+            <div class="card-body">
+                <h3 class="card-title"><%= @posts_count %> 件</h3>
+                <%= link_to '投稿一覧へ', admin_posts_path, class: 'btn btn-light btn-sm' %>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card text-white bg-info">
+            <div class="card-header">コメント総数</div>
+            <div class="card-body">
+                <h3 class="card-title"><%= @comments_count %> 件</h3>
+                </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<h2>🔗 管理メニュー</h2>
+<ul class="list-group">
+    <li class="list-group-item">
+        <%= link_to '会員管理 (一覧・強制退会)', admin_users_path %>
+    </li>
+    <li class="list-group-item">
+        <%= link_to '投稿管理 (一覧・削除)', admin_posts_path %>
+    </li>
+    </ul>

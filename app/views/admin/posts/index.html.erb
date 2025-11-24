@@ -1,0 +1,31 @@
+<h2>投稿一覧（全<%= @total_posts_count %>件）</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>投稿者</th>
+      <th>内容</th>
+      <th>いいね数</th>
+      <th>コメント数</th>
+      <th>投稿日時</th>
+      <th>アクション</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.id %></td>
+        <td><%= link_to post.user.name, admin_user_path(post.user) %></td> <td><%= truncate(post.content, length: 50) %></td> <td><%= post.likes_count %></td>
+        <td><%= post.comments_count %></td>
+        <td><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+        <td>
+          <%= link_to '削除', admin_post_path(post), 
+                      method: :delete, 
+                      data: { confirm: "投稿ID #{post.id} を本当に削除しますか？" },
+                      class: 'btn btn-danger btn-sm' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

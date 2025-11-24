@@ -11,6 +11,12 @@
         <li class="nav-item">
           <%= link_to 'About', about_path, class: 'nav-link' %>
         </li>
+
+        <% if current_user.is_admin? %>
+          <li class="nav-item">
+            <%= link_to '管理者ダッシュボード', admin_root_path, class: 'nav-link' %>
+          </li>
+        <% end %>
         
         <% if user_signed_in? %>
           <li class="nav-item">
