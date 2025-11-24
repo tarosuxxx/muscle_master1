@@ -22,6 +22,36 @@
         <%= link_to '♡ いいね！', post_likes_path(@post), method: :post, class: 'btn btn-danger' %>
       <% end %>
     <% end %>
+    <% if user_signed_in? %>
+      <h3>コメントを追加</h3>
+      <%= form_with(model: [@post, Comment.new], local: true) do |form| %>
+        <div class="form-group">
+          <%= form.text_area :content, rows: 3, class: "form-control", placeholder: "コメントを入力..." %>
+        </div>
+        <br>
+        <%= form.submit "コメント投稿", class: "btn btn-success" %>
+      <% end %>
+    <% end %>
+    <hr>
+    <h3>コメント (<%= @post.comments.count %>件)</h3>
+
+    <% @post.comments.includes(:user).order(created_at: :asc).each do |comment| %>
+      <div class="card mb-2">
+        <div class="card-body">
+          <p class="card-text"><%= comment.content %></p>
+          <p class="text-muted small">
+            投稿者: <%= comment.user.name %> | 
+            投稿日時: <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
+            
+            <% if comment.user == current_user %>
+              <%= link_to '削除', [@post, comment], method: :delete, 
+                          data: { confirm: '本当に削除しますか？' }, 
+                          class: 'btn btn-danger btn-sm float-right' %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    <% end %>
     
     <%= link_to '一覧に戻る', posts_path, class: 'btn btn-secondary mt-3' %>
   </div>
