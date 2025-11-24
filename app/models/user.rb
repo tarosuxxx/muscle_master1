@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: :post
   has_many :comments, dependent: :destroy
@@ -12,6 +12,10 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
 
   has_one_attached :profile_image
+
+  def is_admin?
+    is_admin 
+  end
   
   def already_liked?(post)
     self.likes.exists?(post_id: post.id)

@@ -1,0 +1,33 @@
+<h2>会員一覧</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>ユーザー名</th>
+      <th>メールアドレス</th>
+      <th>登録日時</th>
+      <th>管理者権限</th>
+      <th>アクション</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.created_at.strftime("%Y/%m/%d") %></td>
+        <td><%= user.is_admin? ? 'あり' : 'なし' %></td>
+        <td>
+          <% unless user.is_admin? %>
+            <%= link_to '強制退会', admin_user_path(user), 
+                        method: :delete, 
+                        data: { confirm: "#{user.name} を本当に強制退会させますか？この操作は元に戻せません。" },
+                        class: 'btn btn-danger btn-sm' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
