@@ -1,0 +1,9 @@
+// 1. 削除されたコメントの要素をDOMから除去する
+// コメントのHTML要素には id="comment-<%= @comment.id %>" が設定されている必要があります。
+$("#comment-<%= @comment.id %>").remove();
+
+// 2. コメント件数を更新する
+// コメント件数を表示する要素には id="comments-count-num" または id="comments-area" のようなIDが付いていることを想定
+$("#comments-count-num").text("<%= @post.comments.count %>");
+
+// 補足：コメントが全て削除された場合に、コメントエリア自体を非表示にするなどの処理を追加できます

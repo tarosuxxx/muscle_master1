@@ -1,11 +1,48 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
-
-<div class="row">
-  <div class="col-md-4">
-    <%= @user.inspect %>
-  </div>
-  <div class="col-md-8">
-    <%= render 'posts/posts', posts: @posts %>
-  </div>
+<div class="row user-profile-container my-4">
+    
+    <div class="col-md-4">
+        <div class="card p-4 shadow-sm h-100 text-center">
+            
+            <h3 class="mb-3">プロフィール</h3>
+            
+            <%# プロフィール画像のアバター %>
+            <i class="fas fa-user-circle fa-5x text-secondary mb-3"></i>
+            
+            <h4 class="card-title mb-1"><%= @user.name %></h4>
+            <p class="text-muted small mb-4"><%= @user.email %></p>
+            
+            <%# フォロー/フォロワー数 (未実装でも配置のみ行う) %>
+            <div class="d-flex justify-content-around mb-4">
+                <p class="mb-0"><strong>0</strong> フォロー</p>
+                <p class="mb-0"><strong>0</strong> フォロワー</p>
+            </div>
+            
+            <%# 編集・退会ボタン %>
+            <% if @user == current_user %>
+                <%= link_to 'プロフィール編集', edit_user_registration_path, class: 'btn btn-outline-primary mb-2' %>
+                
+                <%# 退会手続きリンク（Deviseのedit画面への導線を推奨） %>
+                <%= link_to 'アカウント削除/退会手続き', edit_user_registration_path, class: 'btn btn-outline-danger' %>
+            <% else %>
+                <%# 他ユーザーの場合のフォローボタン %>
+                <%= link_to 'フォローする', '#', class: 'btn btn-success' %>
+            <% end %>
+            
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <h3 class="mb-4">
+            <%= @user.name %> さんの投稿 (<%= @posts.size %> 件)
+        </h3>
+        
+        <%# 投稿一覧をグリッド形式で表示（_posts.html.erb パーシャルを再利用） %>
+        <div class="row">
+            <% if @posts.any? %>
+                <%= render 'posts/posts', posts: @posts %>
+            <% else %>
+                <p class="alert alert-info">まだ投稿はありません。</p>
+            <% end %>
+        </div>
+    </div>
 </div>

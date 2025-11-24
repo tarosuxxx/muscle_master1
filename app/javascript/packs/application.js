@@ -19,3 +19,24 @@ window.$ = window.jQuery = jQuery;
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+$(document).on('turbolinks:load', function() {
+  $('#loading-overlay').css('display', 'none');
+ 
+  $('#post-submit-btn').prop('disabled', false); 
+});
+
+
+
+$(document).on('submit', '.data-loading-show', function(event) {
+  
+  
+  
+  $(this).find('#post-submit-btn').prop('disabled', true);
+  
+ 
+  $('#loading-overlay').css('display', 'flex');
+  
+ 
+  return true; 
+});

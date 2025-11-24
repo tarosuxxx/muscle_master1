@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
 
-  has_one_attached :video_file
+  has_one_attached :video
   
   has_many :likes, dependent: :destroy
   has_many :liking_users, through: :likes, source: :user

@@ -15,15 +15,20 @@ class CommentsController < ApplicationController
 
  
   def destroy
-    @comment = Comment.find(params[:id]) 
-    unless @comment.user == current_user
-      redirect_to @comment.post, alert: "他のユーザーのコメントは削除できません。"
-      return
+    @comment = Comment.find(params[:id])
+    @post = @comment.post 
+    if @comment.user == current_user || @post.user == current_user
+      @comment.destroy
+      respond_to do |format|
+        format.html { redirect_to @post, notice: 'コメントを削除しました。' }
+        format.js 
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @post, alert: '削除権限がありません。' }
+        format.js { head :forbidden } 
+      end
     end
-
-    @comment.destroy
-    flash[:notice] = "コメントを削除しました。"
-    redirect_to @comment.post
   end
 
   private
