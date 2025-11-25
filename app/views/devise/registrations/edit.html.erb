@@ -20,8 +20,6 @@
                 <%= f.label :avatar, 'アバター画像を変更', class: 'form-label' %><br />
                 <%= f.file_field :avatar, class: 'form-control' %>
               </div>
-              
-              <%# === 【追加】ユーザー名フィールド === %>
               <div class="mb-3">
                 <%= f.label :name, 'ユーザー名', class: 'form-label' %><br />
                 <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control' %>
