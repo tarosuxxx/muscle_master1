@@ -12,6 +12,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
 
   has_one_attached :profile_image
+  has_one_attached :avatar
 
   def is_admin?
     is_admin 

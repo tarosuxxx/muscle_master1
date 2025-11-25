@@ -4,27 +4,29 @@
         <div class="card p-4 shadow-sm h-100 text-center">
             
             <h3 class="mb-3">プロフィール</h3>
+              <% if @user.avatar.attached? %>
+                <%= image_tag @user.avatar, 
+                              class: 'rounded-circle mb-3', 
+                              style: 'width: 100px; height: 100px; object-fit: cover;' %>
+              <% else %>
+                <i class="fas fa-user-circle fa-5x text-secondary mb-3"></i>
+              <% end %>
+            
+              <h4 class="card-title mb-1"><%= @user.name %></h4>
+              <p class="text-muted small mb-4"><%= @user.email %></p>
             
-            <%# プロフィール画像のアバター %>
-            <i class="fas fa-user-circle fa-5x text-secondary mb-3"></i>
-            
-            <h4 class="card-title mb-1"><%= @user.name %></h4>
-            <p class="text-muted small mb-4"><%= @user.email %></p>
-            
-            <%# フォロー/フォロワー数 (未実装でも配置のみ行う) %>
+           
             <div class="d-flex justify-content-around mb-4">
                 <p class="mb-0"><strong>0</strong> フォロー</p>
                 <p class="mb-0"><strong>0</strong> フォロワー</p>
             </div>
             
-            <%# 編集・退会ボタン %>
+            
             <% if @user == current_user %>
                 <%= link_to 'プロフィール編集', edit_user_registration_path, class: 'btn btn-outline-primary mb-2' %>
-                
-                <%# 退会手続きリンク（Deviseのedit画面への導線を推奨） %>
+
                 <%= link_to 'アカウント削除/退会手続き', edit_user_registration_path, class: 'btn btn-outline-danger' %>
             <% else %>
-                <%# 他ユーザーの場合のフォローボタン %>
                 <%= link_to 'フォローする', '#', class: 'btn btn-success' %>
             <% end %>
             
