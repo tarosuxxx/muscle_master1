@@ -1,1 +1,48 @@
 @use '~bootstrap/scss/bootstrap';
+
+body {
+  background-color: #f8f9fa; 
+}
+
+
+.bg-gradient-orange {
+  background: linear-gradient(to right, #ff8c00, #ffa500); 
+  color: white; 
+}
+
+
+.navbar { 
+  @extend .bg-gradient-orange;
+}
+
+
+.footer {
+  @extend .bg-gradient-orange;
+}
+
+
+.main-content-bg {
+  background-color: #E7E7E7;
+  padding-top: 20px;   
+  padding-bottom: 20px; 
+  min-height: calc(100vh - 120px); 
+}
+
+.input-group-append .btn-primary {
+  border-color: #ff8c00 !important;
+}
+
+.btn-primary {
+  background-color: #ff8c00 !important;
+  border-color: #ff8c00 !important;
+  
+  &:hover {
+    background-color: darken(#ff8c00, 10%) !important; 
+    border-color: darken(#ff8c00, 10%) !important;
+  }
+}
+
+.search-form-card {
+  border: 1px solid #ff8c00 !important; 
+  box-shadow: 0 0.5rem 1rem rgba(255, 140, 0, 0.15) !important;
+}

@@ -1,42 +1,40 @@
-<div class="row">
-  <div class="col-12">
-    <h1 class="mb-4">投稿タイムライン</h1>
-    
-    <%# 検索/絞り込みフォームのエリアをカードで囲み、目立たせる %>
-    <div class="card p-3 mb-4 rounded shadow-sm bg-light">
-      <h5 class="card-title">🔍 投稿内容で検索</h5>
-      
-      <%= form_with url: posts_path, method: :get, local: true, class: "search-form" do |form| %>
-        <div class="input-group">
-          <%= form.text_field :keyword, 
-                              value: params[:keyword], 
-                              class: "form-control", 
-                              placeholder: "キーワードを入力..." %>
-          
-          <button type="submit" class="btn btn-primary">
-            <i class="fas fa-search me-1"></i> 検索
-          </button>
-          
-          <%# 検索解除ボタン（キーワードが入っている場合のみ表示） %>
-          <% if params[:keyword].present? %>
-            <%= link_to 'リセット', posts_path, class: 'btn btn-outline-secondary' %>
+<div class="row justify-content-center">
+  <div class="col-lg-10 col-xl-8">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="mb-4"></h1>
+        <div class="card p-3 mb-4 rounded shadow-sm bg-light search-form-card">
+          <%= form_with url: posts_path, method: :get, local: true, class: "search-form" do |form| %>
+            <div class="input-group">
+              <%= form.text_field :keyword, 
+                                  value: params[:keyword], 
+                                  class: "form-control", 
+                                  placeholder: "キーワードを入力..." %>
+                                  
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-search me-1"></i> 検索
+              </button>
+              <% if params[:keyword].present? %>
+                <%= link_to 'リセット', posts_path, class: 'btn btn-outline-secondary' %>
+              <% end %>
+            </div>
           <% end %>
         </div>
-      <% end %>
-    </div>
-    
-  </div>
-</div>
-
-<div class="row mb-4">
-    <div class="col-12 d-flex justify-content-between align-items-center">
-        <%= link_to '＋ 新規投稿', new_post_path, class: 'btn btn-success' %>
         
-        <p class="text-muted mb-0"><%= @posts.total_count rescue @posts.size %> 件の投稿</p>
+      </div>
     </div>
-</div>
 
-<div class="row">
-    <%# @postsがActiveRecord::Relationの場合、パーシャル内でループする %>
-    <%= render 'posts/posts', posts: @posts %>
-</div>
+    <div class="row mb-4">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <%= link_to '＋ 新規投稿', new_post_path, class: 'btn btn-success' %>
+            
+            <p class="text-muted mb-0"><%= @posts.total_count rescue @posts.size %> 件の投稿</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <%# @postsがActiveRecord::Relationの場合、パーシャル内でループする %>
+        <%= render 'posts/posts', posts: @posts %>
+    </div>
+  </div>
+</div>    

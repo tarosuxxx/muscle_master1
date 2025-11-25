@@ -1,50 +1,45 @@
-<% posts.each do |post| %>
-  <div class="col-lg-4 col-md-6 mb-4">
-    <%= link_to post_path(post), class: "text-decoration-none text-dark d-block h-100" do %>
-      <div class="card h-100 post-card shadow-sm border-0">
-        
-        <div class="post-video-thumbnail position-relative bg-dark rounded-top" style="height: 200px; overflow: hidden;">
-          <% if post.video.attached? %>
-            <%# 動画のサムネイル (再生ボタン付きのプレースホルダー) %>
-            <i class="fas fa-play-circle fa-4x text-white position-absolute top-50 start-50 translate-middle" style="opacity: 0.8; z-index: 10;"></i>
+  <% posts.each do |post| %>
+    <div class="col-lg-4 col-md-6 mb-4">
+      <%= link_to post_path(post), class: "text-decoration-none text-dark d-block h-100" do %>
+        <div class="card h-100 post-card shadow-sm border-0">
+          
+          <div class="post-video-thumbnail position-relative bg-dark rounded-top" style="height: 200px; overflow: hidden;">
+            <% if post.video.attached? %>
+              <i class="fas fa-play-circle fa-4x text-white position-absolute top-50 start-50 translate-middle" style="opacity: 0.8; z-index: 10;"></i>
+              <%= image_tag url_for(post.video.preview(resize_to_limit: [400, 200])), class: 'w-100 h-100 object-fit-cover', style: 'opacity: 0.5;' %>
+            <% else %>
+              <div class="p-5 text-center text-white">
+                <i class="fas fa-video-slash fa-2x mb-2"></i>
+                <p>動画なし</p>
+              </div>
+            <% end %>
+          </div>
+          
+          <div class="card-body">
             
-            <%# Active Storageのプレビュー機能を想定した画像タグ %>
-            <%# サムネイル表示の設定が完了している場合に利用 %>
-            <%= image_tag url_for(post.video.preview(resize_to_limit: [400, 200])), class: 'w-100 h-100 object-fit-cover', style: 'opacity: 0.5;' %>
+            <p class="card-text text-muted small mb-2"><%= truncate(post.content, length: 40) %></p>
             
-          <% else %>
-            <div class="p-5 text-center text-white">
-              <i class="fas fa-video-slash fa-2x mb-2"></i>
-              <p>動画なし</p>
+            <div class="d-flex align-items-center mb-3">
+              <i class="fas fa-user-circle me-2 text-primary"></i>
+              <small class="text-dark"><strong><%= post.user.name %></strong></small>
             </div>
-          <% end %>
-        </div>
-        
-        <div class="card-body">
-          
-          <p class="card-text text-muted small mb-2"><%= truncate(post.content, length: 40) %></p>
-          
-          <div class="d-flex align-items-center mb-3">
-            <i class="fas fa-user-circle me-2 text-primary"></i>
-            <small class="text-dark"><strong><%= post.user.name %></strong></small>
+            
+            <div class="d-flex justify-content-between pt-2 border-top">
+              <small class="text-danger">
+                <i class="fas fa-heart me-1"></i> <%= post.likes.count %>
+              </small>
+              <small class="text-info">
+                <i class="fas fa-comment me-1"></i> <%= post.comments.count %>
+              </small>
+              <small class="text-muted">
+                <%= post.created_at.strftime("%m/%d") %>
+              </small>
+            </div>
+            
+            <%# ⚠️ 注意: 一覧画面でいいねボタンや編集/削除ボタンは非表示にします。操作は詳細画面で行うのが一般的です。 %>
+            
           </div>
-          
-          <div class="d-flex justify-content-between pt-2 border-top">
-            <small class="text-danger">
-              <i class="fas fa-heart me-1"></i> <%= post.likes.count %>
-            </small>
-            <small class="text-info">
-              <i class="fas fa-comment me-1"></i> <%= post.comments.count %>
-            </small>
-            <small class="text-muted">
-              <%= post.created_at.strftime("%m/%d") %>
-            </small>
-          </div>
-          
-          <%# ⚠️ 注意: 一覧画面でいいねボタンや編集/削除ボタンは非表示にします。操作は詳細画面で行うのが一般的です。 %>
-          
         </div>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+      <% end %>
+    </div>
+  <% end %>
