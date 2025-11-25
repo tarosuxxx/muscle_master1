@@ -33,7 +33,7 @@ production:
 
   database: <%= ENV['DB_DATABASE'] %>
   host: <%= ENV['DB_HOST'] %>
-  username: rails_user
+  username: root
   password: 'Asakun101200'
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
