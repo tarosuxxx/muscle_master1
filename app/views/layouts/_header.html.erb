@@ -20,6 +20,9 @@
         
         <% if user_signed_in? %>
           <li class="nav-item">
+            <%= link_to current_user.name, user_path(current_user), class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
             <%= form_with url: destroy_user_session_path, method: :delete, class: 'm-0 p-0' do |f| %>
               <%= f.submit 'ログアウト', class: 'btn btn-link nav-link' %>
             <% end %>
