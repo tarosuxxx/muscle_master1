@@ -26,14 +26,12 @@ test:
   database: sampledb
 
 production:
+  <<: *default
+  database: <%= ENV['DB_DATABASE'] %>
   adapter: mysql2
   encoding: utf8mb4
   charset: utf8mb4
   collation: utf8mb4_general_ci
-
-  database: <%= ENV['DB_DATABASE'] %>
   host: <%= ENV['DB_HOST'] %>
-  username: rails_user
+  username: <%= ENV['DB_USERNAME'] %>
   password: <%= ENV['DB_PASSWORD'] %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
