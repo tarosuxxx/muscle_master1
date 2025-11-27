@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     root to: 'homes#top' 
     resources :users, only: [:index, :destroy] 
     resources :posts, only: [:index, :destroy] 
+    resources :comments, only: [:index, :destroy]
   end
 
   resources :posts do

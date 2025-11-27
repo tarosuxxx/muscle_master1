@@ -9,13 +9,24 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
+    <label for="post_part_ids">トレーニング部位</label>
+    
+    <div class="parts-checkboxes">
+      <% Part.all.each do |part| %>
+        <label>
+          <%= check_box_tag "post[part_ids][]", part.id, @post.part_ids.include?(part.id), id: "post_part_id_#{part.id}" %>
+          <%= part.name %>
+        </label>
+        <br>
+      <% end %>
+      <%= hidden_field_tag "post[part_ids][]", "" %> 
+    </div>
+  </div>
   <div class="mb-3">
     <%= f.label :content, "意識しているポイント" %>
     <%= f.text_area :content, class: 'form-control', rows: 4 %>
   </div>
-  
-  <%# 🌟 動画ファイルアップロード (省略可能) 🌟 %>
   <div class="mb-3">
     <%= f.label :video_file, "動画ファイル" %>
     <%= f.file_field :video_file, class: 'form-control' %>

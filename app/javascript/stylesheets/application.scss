@@ -46,3 +46,59 @@ body {
   border: 1px solid #ff8c00 !important; 
   box-shadow: 0 0.5rem 1rem rgba(255, 140, 0, 0.15) !important;
 }
+
+.hero-section {
+    background-color: #f8f9fa; /* 薄い背景色 */
+    padding: 80px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* ボールやシェイプがはみ出さないように */
+  }
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background-color: rgba(255, 140, 0, 0.1); /* オレンジの薄い円 */
+    border-radius: 50%;
+    z-index: 0;
+  }
+  .hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background-color: rgba(0, 123, 255, 0.1); /* 青の薄い円 */
+    border-radius: 50%;
+    z-index: 0;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1; /* コンテンツを前面に */
+  }
+  .feature-card .card-body {
+    min-height: 200px; /* カードの最小高さを設定して揃える */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .text-orange {
+    color: #ff8c00; /* アプリのブランドカラー（オレンジ系） */
+  }
+  .border-orange {
+    border-color: #ff8c00 !important;
+  }
+  .btn-orange {
+    background-color: #ff8c00;
+    border-color: #ff8c00;
+    color: white;
+  }
+  .btn-orange:hover {
+    background-color: #e67e00;
+    border-color: #e67e00;
+    color: white;
+  }
