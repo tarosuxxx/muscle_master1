@@ -4,9 +4,12 @@ class PostsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy] 
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.all.order(created_at: :desc) 
     if params[:keyword].present?
       @posts = @posts.search_by_keyword(params[:keyword])
+    end
+    if params[:part_ids].present?
+      @posts = @posts.joins(:post_parts).where(post_parts: { part_id: params[:part_ids] }).distinct
     end
   end
   
@@ -25,7 +28,7 @@ class PostsController < ApplicationController
   end
   
   def show
-    @post = Post.find(params[:id]) 
+    @post = Post.includes(:parts).find(params[:id])
   end
 
   def edit
@@ -47,6 +50,14 @@ class PostsController < ApplicationController
 
   private
 
+  def post_params
+    params.require(:post).permit(
+      :content,
+      :video,
+      part_ids: []
+    )
+  end
+
   def set_post
     @post = Post.find(params[:id])
   end
@@ -55,9 +66,5 @@ class PostsController < ApplicationController
     unless @post.user == current_user
       redirect_to posts_path, alert: "他のユーザーの投稿は編集・削除できません。"
     end
-  end
-
-  def post_params
-    params.require(:post).permit(:content, :video_file) 
   end
 end
